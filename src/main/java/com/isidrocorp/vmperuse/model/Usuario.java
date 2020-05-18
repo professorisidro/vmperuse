@@ -50,9 +50,9 @@ public class Usuario {
 	 *  O Cascade indica que, se eu fizer uma determinada operação no usuário isso tb vai 
 	 *  se refletir nas solicitações (ex: inseri um usuário, faço a inserção de uma nova solicitação, se for o caso)
 	 */
-	@OneToMany(mappedBy="solicitante", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="solicitante", cascade = CascadeType.ALL)  //  aqui eu defino essa relacao em termos de "tabelas" 
 	@JsonIgnoreProperties("solicitante")
-	private List<Solicitacao> pedidos;
+	private List<Solicitacao> pedidos;  //aqui eu digo que 1 Usuario possui N Solicitacoes
 	
 	
 	public List<Solicitacao> getPedidos() {

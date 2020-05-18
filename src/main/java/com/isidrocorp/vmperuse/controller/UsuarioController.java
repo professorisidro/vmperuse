@@ -17,22 +17,25 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioDAO dao;
-	
+
 	@PostMapping("/login")
-	public ResponseEntity<Usuario> loginPorEmail(@RequestBody Usuario incompleto){
+	public ResponseEntity<Usuario> loginPorEmail(@RequestBody Usuario incompleto) {
 		// { email: "isidro@isidro.com", "senha": "1234" }
-		Usuario logado = dao.findByEmailAndSenha(incompleto.getEmail(), incompleto.getSenha());
-		if (logado != null) {
-			return ResponseEntity.ok(logado);
-		}
-		else {
-			return ResponseEntity.notFound().build();
+		try {
+			Usuario logado = dao.findByEmailAndSenha(incompleto.getEmail(), incompleto.getSenha());
+			if (logado != null) {
+				return ResponseEntity.ok(logado);
+			} else {
+				return ResponseEntity.notFound().build();
+			}
+		} catch (Exception ex) {
+			return ResponseEntity.status(500).build();
 		}
 	}
-	
+
 	@GetMapping("/usuarios")
-	public ResponseEntity< ArrayList<Usuario> > buscarTodos(){
-		ArrayList<Usuario> lista = (ArrayList<Usuario>)dao.findAll();
+	public ResponseEntity<ArrayList<Usuario>> buscarTodos() {
+		ArrayList<Usuario> lista = (ArrayList<Usuario>) dao.findAll();
 		return ResponseEntity.ok(lista);
 	}
 }

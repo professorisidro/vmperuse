@@ -34,7 +34,7 @@ public class Solicitacao {
 	
 	@ManyToOne
 	@JsonIgnoreProperties("pedidos")
-	private Usuario solicitante;
+	private Usuario solicitante;    // aqui é a relação da chave estrangeira com Usuario
 	
 	public Usuario getSolicitante() {
 		return solicitante;
