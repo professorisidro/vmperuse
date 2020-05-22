@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +14,7 @@ import com.isidrocorp.vmperuse.dao.UsuarioDAO;
 import com.isidrocorp.vmperuse.model.Usuario;
 
 @RestController
+@CrossOrigin("*")
 public class UsuarioController {
 
 	@Autowired
@@ -24,6 +26,7 @@ public class UsuarioController {
 		try {
 			Usuario logado = dao.findByEmailAndSenha(incompleto.getEmail(), incompleto.getSenha());
 			if (logado != null) {
+				logado.setSenha("***********");
 				return ResponseEntity.ok(logado);
 			} else {
 				return ResponseEntity.notFound().build();
